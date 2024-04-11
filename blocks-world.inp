@@ -1,0 +1,12 @@
+
+% Modification of Listing 7.4: Input for the blocks world planning program
+
+#const h=8. % time
+#const m=2. % concurrency
+#const b=9. % blocks
+
+init( loc(1,2); loc(2,3); loc(3,4); loc(4,table) ).
+init( loc(5,6); loc(6,7); loc(7,table) ).
+init( loc(8,9); loc(9,table) ).
+
+goal( loc(9,6); loc(6,3); loc(3,table) ).
