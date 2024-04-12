@@ -37,6 +37,6 @@ if __name__=='__main__':
             print(model)
             # for atom in model.symbols(atoms=True):  
             #     # atoms=True for ignoring #show statements, otherwise symbols will retrieve only shown atoms.
-            #     if atom.name == 'bulb' and len(atom.arguments) == 1:  # We check if atom is bulb/1.
-            #         print(f'Bulb is {atom.arguments[0]}')  # Arguments can be retrieved from atom.arguments
+            #     if atom.name == 'block' and len(atom.arguments) == 1:  # We check if atom is block/1.
+            #         print(f'Block is {atom.arguments[0]}')  # Arguments can be retrieved from atom.arguments
             nanswer+=1
