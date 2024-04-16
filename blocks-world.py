@@ -23,7 +23,7 @@ if __name__=='__main__':
         INPUT_PROGRAM = f.read()
 
     ctrl = clingo.Control(
-        # arguments=['-n', '0'],
+        arguments=['-n', '0'],
     )
 
     ctrl.add("base", [], ASP_PROGRAM)
