@@ -31,12 +31,28 @@ if __name__=='__main__':
     ctrl.ground([("base", []), ("input", [])])
 
     with ctrl.solve(yield_=True) as solution_iterator:
-        nanswer=1
+        nanswer=0
+        atom_count = {}
+
         for model in solution_iterator:
-            print(f'Answer {nanswer}')
-            print(model)
-            # for atom in model.symbols(atoms=True):  
-            #     # atoms=True for ignoring #show statements, otherwise symbols will retrieve only shown atoms.
-            #     if atom.name == 'block' and len(atom.arguments) == 1:  # We check if atom is block/1.
-            #         print(f'Block is {atom.arguments[0]}')  # Arguments can be retrieved from atom.arguments
             nanswer+=1
+            # print(f'Answer {nanswer}')
+            # print(model)
+
+            for atom in model.symbols(atoms=True):  
+                # atoms=True for ignoring #show statements, otherwise symbols will retrieve only shown atoms.
+                if atom.name == 'occurs' and len(atom.arguments) == 2:  # We check if atom is occurs/2.
+                    # print(f'Block is {atom.arguments[0]}')  # Arguments can be retrieved from atom.arguments
+                    if str(atom) in atom_count:
+                        atom_count[str(atom)] += 1
+                    else:
+                        atom_count[str(atom)] = 1
+    
+    print("What's true for all models:")
+    print([i[0] for i in atom_count.items() if i[1] == nanswer], sep='\n')
+    print()
+    
+    print("Percentage of models that atom holds true in:")
+    percentage = sorted(atom_count.items(), key=lambda x: x[1], reverse=True)
+    percentage = [(i[0], round(i[1]/nanswer, 3)) for i in percentage]
+    print(percentage)
