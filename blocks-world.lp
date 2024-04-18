@@ -39,5 +39,9 @@ B1 = B2 :- holds(loc(B1, B), T), holds(loc(B2, B), T), block(B).
 % relationship between holds/2, init/1, and goal/1.
 holds(C, 0) :- init(C).
 :- not holds(C, h), goal(C).
-    
+
+% color constraints
+{ block(I, 1..c) } = 1 :- block(I).
+:- not block(I, C), goal_c(I, C). 
+
 #show occurs/2.

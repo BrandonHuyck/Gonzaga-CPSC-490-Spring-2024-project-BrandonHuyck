@@ -1,14 +1,17 @@
 
 % Modification of Listing 7.4: Input for the blocks world planning program
 
-#const h=7. % time
+#const h=5. % time
 #const m=2. % concurrency
 #const b=9. % blocks
+#const c=2. % colors
 
 init( loc(1,2); loc(2,3); loc(3,4); loc(4,table) ).
 init( loc(5,6); loc(6,7); loc(7,table) ).
 init( loc(8,9); loc(9,table) ).
 
 goal( loc(9,6); loc(6,3); loc(3,table) ).
+
+goal_c( block(9, 1); block(6, 2); block(3, 1) ).
 
 % #maximize{1, T : occurs(wait,T)}. % un/comment for maximize or all models
