@@ -13,6 +13,7 @@ References include bramucas/clingo_python_basics; Answer Set Programming
 '''
 
 import clingo
+from clingo.symbol import *
 from sys import argv
 
 if __name__=='__main__':
@@ -36,7 +37,8 @@ if __name__=='__main__':
 
         for model in solution_iterator:
             nanswer+=1
-            # print(f'Answer {nanswer}')
+            if nanswer%10000==0:
+                print(f'Answer {nanswer}')
             # print(model)
 
             for atom in model.symbols(atoms=True):  
@@ -56,3 +58,20 @@ if __name__=='__main__':
     percentage = sorted(atom_count.items(), key=lambda x: x[1], reverse=True)
     percentage = [(i[0], round(i[1]/nanswer, 3)) for i in percentage]
     print(percentage)
+
+    ###
+    
+    ctrl_ = clingo.Control(
+        arguments=['-n', '0'],
+    )
+    ctrl_.add("in_world", ["old", "number"], "in_world(old, number).")
+    with ctrl.solve(yield_=True) as solution_iterator:
+        nanswer=0
+        for model in solution_iterator:
+            nanswer+=1
+            if nanswer%10000==0:
+                print(f'Answer {nanswer}')
+            for atom in model.symbols(atoms=True):  
+                if atom.name == 'occurs' and len(atom.arguments) == 2:  # We check if atom is occurs/2.
+                    ctrl_.ground([("in_world", [String(str(atom)), Number(nanswer)])])
+    print(ctrl_.solve(on_model=print))
