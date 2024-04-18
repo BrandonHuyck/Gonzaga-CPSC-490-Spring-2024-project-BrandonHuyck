@@ -8,6 +8,7 @@
 % representing the goal; length h of solutions.
 
 block(1..b).
+{ block(I, 1..c) } = 1 :- block(I).
 
 % choice of actions
 action(move(B1, B2)) :- block(B1), block(B2), B1 != B2.
@@ -22,13 +23,16 @@ A = wait :- occurs(wait,T), occurs(A,T).
 holds(loc(B, L), T+1) :- occurs(move(B, L), T).
 
 % two blocks can’t be located on top of the same block
-B1 = B2 :- holds(loc(B1, B), T), holds(loc(B2, B), T), block(B).
+:- occurs(move(_,B),T), holds(loc(_,B),T), block(B).
 
 % a block can’t be moved unless it is clear
 :- occurs(move(B, L), T), holds(loc(_, B), T).
 
 % a block can’t be moved to its current location
 :- occurs(move(B, L), T), holds(loc(B, L), T).
+
+% a block can't be placed on one of the same color
+:- occurs(move(B2,B1), T), block(B1, C), block(B2, C).
 
 % existence and uniqueness of value
 :- #count{ L : holds(loc(B, L), T) } != 1, block(B), T = 0..h.
@@ -41,7 +45,6 @@ holds(C, 0) :- init(C).
 :- not holds(C, h), goal(C).
 
 % color constraints
-{ block(I, 1..c) } = 1 :- block(I).
-:- not block(I, C), goal_c(I, C). 
+:- not block(I, C), goal_c(block(I, C)). 
 
 #show occurs/2.

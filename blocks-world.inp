@@ -13,5 +13,6 @@ init( loc(8,9); loc(9,table) ).
 goal( loc(9,6); loc(6,3); loc(3,table) ).
 
 goal_c( block(9, 1); block(6, 2); block(3, 1) ).
+goal_c( block(1, 1); block(2,2); block(4,2); block(5,1); block(7,1); block(8,2) ).
 
 % #maximize{1, T : occurs(wait,T)}. % un/comment for maximize or all models
