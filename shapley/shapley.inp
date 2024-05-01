@@ -1,0 +1,23 @@
+
+init(jfk, cdg).
+init(ewr, lhr).
+init(bos, lhr).
+init(lhr, cdg).
+init(lhr, ory).
+init(lax, muc).
+init(muc, ory).
+init(lhr, muc).
+% init/2 with (src_airport, dest_airport).
+
+airport(jfk, us).
+airport(ewr, us).
+airport(bos, us).
+airport(lax, us).
+airport(lhr, en).
+airport(muc, gr).
+airport(ory, fr).
+airport(cdg, fr).
+% airport/2 with (airport, country).
+
+query(us, fr).
+% query/2 with (src_country, dest_country).
